@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         // Créer un bouton
         Button btn = new Button();
-        btn.setText("Cliquez-moi !");
+        btn.setText("Test !");
         btn.setOnAction(event -> System.out.println("Bonjour, JavaFX !"));
 
         // Ajouter le bouton dans un layout
@@ -23,7 +23,7 @@ public class Main extends Application {
         Scene scene = new Scene(root, 300, 250);
 
         // Configurer la fenêtre (Stage)
-        primaryStage.setTitle("Mon Application JavaFX");
+        primaryStage.setTitle("Calculatrice");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
