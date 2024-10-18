@@ -1,6 +1,4 @@
-package Code.Controler;
-
-import Code.Model.CalculatorModelInterface;
+package Code.Model;
 
 import java.util.Stack;
 
