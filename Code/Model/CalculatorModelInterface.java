@@ -1,11 +1,11 @@
 package Code.Model;
 
 public interface CalculatorModelInterface {
-    public double add(double valeur1,double valeur2);
-    public double substract(double valeur1,double valeur2);
-    public double multiply(double valeur1,double valeur2);
-    public double divide(double valeur1,double valeur2);
-    public double opposite(double valeur1);
+    public void add();
+    public void substract();
+    public void multiply();
+    public void divide();
+    public void opposite();
     public void push();
     public void pop();
     public void drop();
