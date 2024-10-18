@@ -9,7 +9,7 @@ public class CalculatorModel implements CalculatorModelInterface {
     @Override
     public void add() {
         if(Pile.size()>1){
-            double operande1 = (double) Pile.poo();
+            double operande1 = (double) Pile.pop();
             double operande2 = (double) Pile.pop();
             Pile.push(operande2 + operande1);
         }
@@ -19,10 +19,11 @@ public class CalculatorModel implements CalculatorModelInterface {
     @Override
     public void substract() {
         if(Pile.size()>1){
-            double operande1 = (double) Pile.poo();
+            double operande1 = (double) Pile.pop();
             double operande2 = (double) Pile.pop();
             Pile.push(operande2 - operande1);
 
+    }
     }
 
     @Override
@@ -81,6 +82,7 @@ public class CalculatorModel implements CalculatorModelInterface {
             Pile.pop();
         } else {
             System.out.println("La pile est vide");
+        }
     }
 
     @Override
