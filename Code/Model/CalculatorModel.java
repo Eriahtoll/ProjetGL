@@ -4,6 +4,7 @@ import java.util.Stack;
 
 public class CalculatorModel implements CalculatorModelInterface {
     private Stack<Double> Pile = new Stack();
+    private String accu = new String();
     public CalculatorModel() {
     }
     @Override
@@ -101,5 +102,13 @@ public class CalculatorModel implements CalculatorModelInterface {
     public void clear() {
         Pile.clear();
 
+    }
+
+    public void setAccu(String accu) {
+        this.accu = accu;
+    }
+
+    public String getAccu() {
+        return accu;
     }
 }
