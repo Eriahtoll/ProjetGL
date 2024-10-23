@@ -5,6 +5,8 @@ import java.util.Stack;
 public class CalculatorModel implements CalculatorModelInterface {
     private Stack<Double> Pile = new Stack();
     private String accu = new String();
+
+
     public CalculatorModel() {
     }
     @Override
@@ -14,7 +16,6 @@ public class CalculatorModel implements CalculatorModelInterface {
             double operande2 = (double) Pile.pop();
             Pile.push(operande2 + operande1);
         }
-
     }
 
     @Override
