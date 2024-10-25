@@ -15,11 +15,11 @@ import java.util.Stack;
 
 
 public class CalculatorGUI extends Scene implements CalculatorGUIInterface{
-    private Button button;
+    private Buttons buttons;
 
-    public CalculatorGUI(Parent parent, Button button) {
+    public CalculatorGUI(Parent parent, Buttons buttons) {
         super(parent);
-        this.button = button;
+        this.buttons = buttons;
     }
 
     @Override
