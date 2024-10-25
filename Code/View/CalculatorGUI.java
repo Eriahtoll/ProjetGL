@@ -20,7 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class CalculatorGUI implements CalculatorGUIInterface{
+public class CalculatorGUI implements CalculatorGUIInterface {
     private Button button;
     private Stage stage;
     public CalculatorGUI(Stage stage) {
