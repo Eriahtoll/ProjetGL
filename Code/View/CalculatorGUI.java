@@ -25,11 +25,11 @@ public class CalculatorGUI implements CalculatorGUIInterface {
     Buttons buttonMOINS = new Buttons("-");
     Buttons buttonFOIS = new Buttons("*");
     Buttons buttonDIVIS = new Buttons("/");
-    Buttons buttonENT = new Buttons("<>");
+    Buttons buttonENT = new Buttons("ENTER");
     Buttons buttonDEL = new Buttons("DEL");
     Buttons buttonCLEAR = new Buttons("AC");
     Buttons buttonVIRG = new Buttons(",");
-    Buttons buttonSWAP = new Buttons("<=>");
+    Buttons buttonSWAP = new Buttons("SWAP");
     Buttons buttonEmpty = new Buttons(" ");
     GridPane clavier = new GridPane();
 
@@ -91,6 +91,8 @@ public class CalculatorGUI implements CalculatorGUIInterface {
         // Ajout des labels dans ecran
         ecran.getChildren().addAll(labelStack5, labelStack4, labelStack3, labelStack2, labelStack1, labelAccu);
 
+        clavier.setStyle("-fx-background-color: black;");
+
         VBox vBoxPrincipal = new VBox();
         vBoxPrincipal.getChildren().add(ecran);
         vBoxPrincipal.getChildren().add(clavier);
@@ -110,7 +112,8 @@ public class CalculatorGUI implements CalculatorGUIInterface {
         label.setStyle(
                 "-fx-padding: 0 10 0 0;" +           // Ajout de 10px de padding à droite
                         "-fx-border-color: grey;" +          // Couleur de la bordure
-                        "-fx-border-width: 1;" +              // Épaisseur de la bordure
+                        "-fx-border-width: 1;" +
+                        " -fx-font-size: 30;"+
                         "-fx-border-insets: 0;"               // Position de la bordure par rapport au label
         );
     }
