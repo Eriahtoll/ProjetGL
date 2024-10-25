@@ -2,8 +2,6 @@ package Code.View;
 
 import javafx.scene.layout.GridPane;
 
-import java.util.ArrayList;
-
 public class Buttons extends javafx.scene.control.Button {
 
     public Buttons(String nom) {
