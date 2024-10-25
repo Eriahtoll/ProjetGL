@@ -1,5 +1,7 @@
 package Code.View;
 
+import Code.Controler.CalculatorControler;
+import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -61,7 +63,7 @@ public class CalculatorGUI implements CalculatorGUIInterface {
         clavier.add(buttonCLEAR, 4, 0);
         clavier.add(buttonVIRG, 2, 3);
         clavier.add(buttonSWAP, 4, 3);;
-
+       buttonENT.addEventHandler(ActionEvent.ACTION, CalculatorControler);
         VBox ecran = new VBox();
         ecran.setPrefSize(500,400);
         VBox vBoxPrincipal = new VBox();
