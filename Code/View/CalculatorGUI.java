@@ -1,7 +1,8 @@
 package Code.View;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -29,11 +30,11 @@ public class CalculatorGUI implements CalculatorGUIInterface {
     Buttons buttonCLEAR = new Buttons("AC");
     Buttons buttonVIRG = new Buttons(",");
     Buttons buttonSWAP = new Buttons("<=>");
+    Buttons buttonEmpty = new Buttons(" ");
     GridPane clavier = new GridPane();
 
-
-
     private Stage stage;
+
     public CalculatorGUI(Stage stage) {
         this.stage = stage;
         affiche();
@@ -42,6 +43,8 @@ public class CalculatorGUI implements CalculatorGUIInterface {
     // Méthode affiche() qui configure l'interface graphique
     public void affiche() {
         stage.setTitle("Calculatrice");
+
+        // Configuration des boutons du clavier
         clavier.add(button1, 0, 2);
         clavier.add(button2, 1, 2);
         clavier.add(button3, 2, 2);
@@ -60,15 +63,35 @@ public class CalculatorGUI implements CalculatorGUIInterface {
         clavier.add(buttonDEL, 4, 1);
         clavier.add(buttonCLEAR, 4, 0);
         clavier.add(buttonVIRG, 2, 3);
-        clavier.add(buttonSWAP, 4, 3);;
+        clavier.add(buttonSWAP, 4, 3);
+        clavier.add(buttonEmpty, 0, 3);
 
         VBox ecran = new VBox();
-        ecran.setPrefSize(500,400);
+        ecran.setPrefSize(500, 400);
+
+        // Création des labels avec un padding droit et un contour
+        Label labelStack5 = new Label("0");
+        styleLabel(labelStack5, 500, 60);
+
+        Label labelStack4 = new Label("0");
+        styleLabel(labelStack4, 500, 60);
+
+        Label labelStack3 = new Label("0");
+        styleLabel(labelStack3, 500, 60);
+
+        Label labelStack2 = new Label("0");
+        styleLabel(labelStack2, 500, 60);
+
+        Label labelStack1 = new Label("0");
+        styleLabel(labelStack1, 500, 60);
+
+        Label labelAccu = new Label("0");
+        styleLabel(labelAccu, 500, 100);
+
+        // Ajout des labels dans ecran
+        ecran.getChildren().addAll(labelStack5, labelStack4, labelStack3, labelStack2, labelStack1, labelAccu);
+
         VBox vBoxPrincipal = new VBox();
-        VBox vBoxEcran = new VBox();
-
-
-
         vBoxPrincipal.getChildren().add(ecran);
         vBoxPrincipal.getChildren().add(clavier);
 
@@ -80,18 +103,21 @@ public class CalculatorGUI implements CalculatorGUIInterface {
         stage.show();
     }
 
-
-
-    @Override
-    public void changeaccu(String accu) {
-
+    // Méthode pour appliquer les styles aux labels
+    private void styleLabel(Label label, int width, int height) {
+        label.setPrefSize(width, height);
+        label.setAlignment(Pos.CENTER_RIGHT);
+        label.setStyle(
+                "-fx-padding: 0 10 0 0;" +           // Ajout de 10px de padding à droite
+                        "-fx-border-color: grey;" +          // Couleur de la bordure
+                        "-fx-border-width: 1;" +              // Épaisseur de la bordure
+                        "-fx-border-insets: 0;"               // Position de la bordure par rapport au label
+        );
     }
 
     @Override
-    public void changestack(Stack Pile) {
+    public void changeaccu(String accu) {}
 
-    }
-    
-
-
+    @Override
+    public void changestack(Stack Pile) {}
 }
