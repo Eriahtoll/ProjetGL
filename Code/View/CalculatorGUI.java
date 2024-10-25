@@ -42,28 +42,28 @@ public class CalculatorGUI implements CalculatorGUIInterface {
     // Méthode affiche() qui configure l'interface graphique
     public void affiche() {
         stage.setTitle("Calculatrice");
-        clavier.add(button1, 2, 0);
-        clavier.add(button2, 2, 1);
+        clavier.add(button1, 0, 2);
+        clavier.add(button2, 1, 2);
         clavier.add(button3, 2, 2);
-        clavier.add(button4, 1, 0);
+        clavier.add(button4, 0, 1);
         clavier.add(button5, 1, 1);
-        clavier.add(button6, 1, 2);
+        clavier.add(button6, 2, 1);
         clavier.add(button7, 0, 0);
-        clavier.add(button8, 0, 1);
-        clavier.add(button9, 0, 2);
-        clavier.add(button0, 3, 1);
-        clavier.add(buttonPLUS, 0, 3);
-        clavier.add(buttonMOINS, 1, 3);
-        clavier.add(buttonFOIS, 2, 3);
+        clavier.add(button8, 1, 0);
+        clavier.add(button9, 2, 0);
+        clavier.add(button0, 1, 3);
+        clavier.add(buttonPLUS, 3, 0);
+        clavier.add(buttonMOINS, 3, 1);
+        clavier.add(buttonFOIS, 3, 2);
         clavier.add(buttonDIVIS, 3, 3);
-        clavier.add(buttonENT, 3, 4);
-        clavier.add(buttonDEL, 1, 4);
-        clavier.add(buttonCLEAR, 0, 4);
-        clavier.add(buttonVIRG, 3, 2);
-        clavier.add(buttonSWAP, 2, 4);
+        clavier.add(buttonENT, 4, 2);
+        clavier.add(buttonDEL, 4, 1);
+        clavier.add(buttonCLEAR, 4, 0);
+        clavier.add(buttonVIRG, 2, 3);
+        clavier.add(buttonSWAP, 4, 3);;
 
         VBox ecran = new VBox();
-        ecran.setPrefSize(600,400);
+        ecran.setPrefSize(500,400);
         VBox vBoxPrincipal = new VBox();
         VBox vBoxEcran = new VBox();
 
@@ -73,7 +73,7 @@ public class CalculatorGUI implements CalculatorGUIInterface {
         vBoxPrincipal.getChildren().add(clavier);
 
         // Créer une scène avec le VBox et des dimensions de 600x400
-        Scene scene = new Scene(vBoxPrincipal, 600, 900);
+        Scene scene = new Scene(vBoxPrincipal, 500, 800);
 
         // Définir la scène sur le stage et afficher la fenêtre
         stage.setScene(scene);
