@@ -19,9 +19,7 @@ public class Main extends Application {
         CalculatorModel calculatorModel = new CalculatorModel(calculatorControler);
         calculatorControler.setCalculatorGUI(calculatorGUI);
         calculatorControler.setCalculatorModel(calculatorModel);
-        double test = -3.0;
-        String s = String.valueOf(test);
-        System.out.println("Test: " + s);
+
 
     }
 
