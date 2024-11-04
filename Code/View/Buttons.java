@@ -18,5 +18,4 @@ public class Buttons extends javafx.scene.control.Button {
         // Restaurer la couleur d'origine au relâchement du clic
         this.setOnMouseReleased(event -> this.setStyle(originalStyle));
     }
-
 }

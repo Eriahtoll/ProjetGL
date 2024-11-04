@@ -1,74 +1,127 @@
 package Code.Model;
 
+import Code.Controler.CalculatorControlerInterface;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class CalculatorModel implements CalculatorModelInterface {
     private Stack<Double> Pile = new Stack();
     private String accu = new String();
+    private CalculatorControlerInterface calculatorControler;
 
-
-    public CalculatorModel() {
+    public CalculatorModel(CalculatorControlerInterface calculatorControler) {
+        this.calculatorControler = calculatorControler;
     }
     @Override
     public void add() {
-        if(Pile.size()>1){
+        if(!accu.isEmpty() && !Pile.isEmpty()) {
+            double numAccu = Double.parseDouble(accu);
+            double operande1 = (double) Pile.pop();
+            accu = String.valueOf(numAccu + operande1);
+        }
+        else if (accu.isEmpty() && Pile.size()>1){
             double operande1 = (double) Pile.pop();
             double operande2 = (double) Pile.pop();
-            Pile.push(operande2 + operande1);
+            accu = String.valueOf(operande2 + operande1);
         }
+        List<Double> stackdata = new ArrayList<>(Pile);
+        calculatorControler.changestack(stackdata);
+        calculatorControler.changeaccu(accu);
     }
 
     @Override
     public void substract() {
-        if(Pile.size()>1){
+        if(!accu.isEmpty() && !Pile.isEmpty()) {
+            double numAccu = Double.parseDouble(accu);
+            double operande1 = (double) Pile.pop();
+            accu = String.valueOf(operande1 - numAccu);
+        }
+        else if (accu.isEmpty() && Pile.size()>1){
             double operande1 = (double) Pile.pop();
             double operande2 = (double) Pile.pop();
-            Pile.push(operande2 - operande1);
+            accu = String.valueOf(operande2 - operande1);
+        }
+        List<Double> stackdata = new ArrayList<>(Pile);
+        calculatorControler.changestack(stackdata);
+        calculatorControler.changeaccu(accu);
 
     }
-    }
+
 
     @Override
     public void multiply() {
-        if (Pile.size() >= 2) {
-            double value1 = Pile.pop();
-            double value2 = Pile.pop();
-
-            double result = value1 * value2;
-
-            Pile.push(result);
-        } else {
-            System.out.println("La pile contient moins de deux éléments");
+        if(!accu.isEmpty() && !Pile.isEmpty()) {
+            double numAccu = Double.parseDouble(accu);
+            double operande1 = (double) Pile.pop();
+            accu = String.valueOf(operande1 *numAccu);
         }
+        else if (accu.isEmpty() && Pile.size()>1){
+            double operande1 = (double) Pile.pop();
+            double operande2 = (double) Pile.pop();
+            accu = String.valueOf(operande2 * operande1);
+        }
+        List<Double> stackdata = new ArrayList<>(Pile);
+        calculatorControler.changestack(stackdata);
+        calculatorControler.changeaccu(accu);
     }
+
     @Override
     public void divide() {
-        if (Pile.size() >= 2) {
-            Double value1 = Pile.pop();
-            Double value2 = Pile.pop();
-
-            if (value1 != 0) {
-                Double result = value2 / value1;
-                Pile.push(result);
-            } else {
-                Pile.push(value2);
-                Pile.push(value1);
-                System.out.println("Impossible de diviser par zéro.");
+        if(!accu.isEmpty() && !Pile.isEmpty()) {
+            double numAccu = Double.parseDouble(accu);
+            double operande1 = (double) Pile.pop();
+            if (numAccu!=0){
+                accu = String.valueOf(operande1 /numAccu);
             }
-        } else {
-            System.out.println("La pile contient moins de deux éléments");
+            else{
+                calculatorControler.changeaccu("DIVISION PAR 0");
+            }
         }
+        else if (accu.isEmpty() && Pile.size()>1){
+            double operande1 = (double) Pile.pop();
+            double operande2 = (double) Pile.pop();
+            if(operande1!=0){
+                accu = String.valueOf(operande2 /operande1);
+            }
+            else{
+                calculatorControler.changeaccu("DIVISION PAR 0");
+            }
+        }
+        List<Double> stackdata = new ArrayList<>(Pile);
+        calculatorControler.changestack(stackdata);
+        calculatorControler.changeaccu(accu);
     }
 
     @Override
     public void opposite() {
+        if(!accu.isEmpty()) {
+            double numAccu = Double.parseDouble(accu);
+            accu = String.valueOf(-1 * numAccu);
+        }
+        else if (!Pile.isEmpty()){
+            double operande1 = -1 * (double) Pile.pop();
+            Pile.push(operande1);
+        }
+        List<Double> stackdata = new ArrayList<>(Pile);
+        calculatorControler.changestack(stackdata);
+        calculatorControler.changeaccu(accu);
 
     }
 
     @Override
-    public void push(double num) {
-        Pile.push(num);
-
+    public void push() {
+        try {
+            double numberaccu = Double.parseDouble(accu);
+            Pile.push(numberaccu);
+            List<Double> stackdata = new ArrayList<>(Pile);
+            calculatorControler.changestack(stackdata);
+            accu = "";
+            calculatorControler.changeaccu(accu);
+        } catch (NumberFormatException e) {
+            calculatorControler.changeaccu("IMPOSSIBLE FORMAT NOMBRE INVALIDE");
+        }
     }
 
     @Override
@@ -76,40 +129,56 @@ public class CalculatorModel implements CalculatorModelInterface {
         if(!Pile.isEmpty()){
         return (double) Pile.pop();}
         return 0;
+
     }
 
     @Override
     public void drop() {
-        if (Pile.size() >= 1) {
+        if (!Pile.isEmpty()) {
             Pile.pop();
-        } else {
-            System.out.println("La pile est vide");
         }
+        List<Double> stackdata = new ArrayList<>(Pile);
+        calculatorControler.changestack(stackdata);
+        calculatorControler.changeaccu(accu);
     }
 
     @Override
     public void swap() {
-        if (Pile.size() >= 2) {
-            double value1 = Pile.pop();
-            double value2 = Pile.pop();
-            Pile.push(value1);
-            Pile.push(value2);
-        } else {
-            System.out.println("La pile contient moins de deux éléments");
+        if(!accu.isEmpty() && !Pile.isEmpty()) {
+            double numAccu = Double.parseDouble(accu);
+            double operande1 = (double) Pile.pop();
+            accu = String.valueOf(operande1);
+            Pile.push(numAccu);
         }
+        else if (accu.isEmpty() && Pile.size()>1){
+            double operande1 = (double) Pile.pop();
+            double operande2 = (double) Pile.pop();
+            Pile.push(operande1);
+            Pile.push(operande2);
+        }
+        List<Double> stackdata = new ArrayList<>(Pile);
+        calculatorControler.changestack(stackdata);
+        calculatorControler.changeaccu(accu);
     }
 
     @Override
     public void clear() {
         Pile.clear();
+        accu = "";
+        calculatorControler.changeaccu(accu);
+        List<Double> stackdata = new ArrayList<>(Pile);
+        calculatorControler.changestack(stackdata);
 
     }
 
-    public void setAccu(String accu) {
-        this.accu = accu;
+    @Override
+    public void setaccu(String text) {
+        accu = text;
+        calculatorControler.changeaccu(accu);
     }
 
-    public String getAccu() {
+    @Override
+    public String getaccu() {
         return accu;
     }
 }
