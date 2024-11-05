@@ -16,16 +16,20 @@ public class CalculatorModel implements CalculatorModelInterface {
     }
     @Override
     public void add() {
-        if(!accu.isEmpty() && !Pile.isEmpty()) {
-            double numAccu = Double.parseDouble(accu);
-            double operande1 = (double) Pile.pop();
-            accu = String.valueOf(numAccu + operande1);
+        try {
+            if (!accu.isEmpty() && !Pile.isEmpty()) {
+                double numAccu = Double.parseDouble(accu);
+                double operande1 = (double) Pile.pop();
+                accu = String.valueOf(numAccu + operande1);
+            } else if (accu.isEmpty() && Pile.size() > 1) {
+                double operande1 = (double) Pile.pop();
+                double operande2 = (double) Pile.pop();
+                accu = String.valueOf(operande2 + operande1);
+            }
+        } catch (NumberFormatException e) {
+            calculatorControler.changeaccu("IMPOSSIBLE FORMAT NOMBRE INVALIDE");
         }
-        else if (accu.isEmpty() && Pile.size()>1){
-            double operande1 = (double) Pile.pop();
-            double operande2 = (double) Pile.pop();
-            accu = String.valueOf(operande2 + operande1);
-        }
+
         List<Double> stackdata = new ArrayList<>(Pile);
         calculatorControler.changestack(stackdata);
         calculatorControler.changeaccu(accu);
@@ -33,35 +37,41 @@ public class CalculatorModel implements CalculatorModelInterface {
 
     @Override
     public void substract() {
-        if(!accu.isEmpty() && !Pile.isEmpty()) {
-            double numAccu = Double.parseDouble(accu);
-            double operande1 = (double) Pile.pop();
-            accu = String.valueOf(operande1 - numAccu);
+        try {
+            if (!accu.isEmpty() && !Pile.isEmpty()) {
+                double numAccu = Double.parseDouble(accu);
+                double operande1 = (double) Pile.pop();
+                accu = String.valueOf(operande1 - numAccu);
+            } else if (accu.isEmpty() && Pile.size() > 1) {
+                double operande1 = (double) Pile.pop();
+                double operande2 = (double) Pile.pop();
+                accu = String.valueOf(operande2 - operande1);
+            }
+        } catch (NumberFormatException e) {
+            calculatorControler.changeaccu("IMPOSSIBLE FORMAT NOMBRE INVALIDE");
         }
-        else if (accu.isEmpty() && Pile.size()>1){
-            double operande1 = (double) Pile.pop();
-            double operande2 = (double) Pile.pop();
-            accu = String.valueOf(operande2 - operande1);
-        }
+
         List<Double> stackdata = new ArrayList<>(Pile);
         calculatorControler.changestack(stackdata);
         calculatorControler.changeaccu(accu);
-
     }
-
 
     @Override
     public void multiply() {
-        if(!accu.isEmpty() && !Pile.isEmpty()) {
-            double numAccu = Double.parseDouble(accu);
-            double operande1 = (double) Pile.pop();
-            accu = String.valueOf(operande1 *numAccu);
+        try {
+            if (!accu.isEmpty() && !Pile.isEmpty()) {
+                double numAccu = Double.parseDouble(accu);
+                double operande1 = (double) Pile.pop();
+                accu = String.valueOf(operande1 * numAccu);
+            } else if (accu.isEmpty() && Pile.size() > 1) {
+                double operande1 = (double) Pile.pop();
+                double operande2 = (double) Pile.pop();
+                accu = String.valueOf(operande2 * operande1);
+            }
+        } catch (NumberFormatException e) {
+            calculatorControler.changeaccu("IMPOSSIBLE FORMAT NOMBRE INVALIDE");
         }
-        else if (accu.isEmpty() && Pile.size()>1){
-            double operande1 = (double) Pile.pop();
-            double operande2 = (double) Pile.pop();
-            accu = String.valueOf(operande2 * operande1);
-        }
+
         List<Double> stackdata = new ArrayList<>(Pile);
         calculatorControler.changestack(stackdata);
         calculatorControler.changeaccu(accu);
@@ -69,26 +79,28 @@ public class CalculatorModel implements CalculatorModelInterface {
 
     @Override
     public void divide() {
-        if(!accu.isEmpty() && !Pile.isEmpty()) {
-            double numAccu = Double.parseDouble(accu);
-            double operande1 = (double) Pile.pop();
-            if (numAccu!=0){
-                accu = String.valueOf(operande1 /numAccu);
+        try {
+            if (!accu.isEmpty() && !Pile.isEmpty()) {
+                double numAccu = Double.parseDouble(accu);
+                double operande1 = (double) Pile.pop();
+                if (numAccu != 0) {
+                    accu = String.valueOf(operande1 / numAccu);
+                } else {
+                    calculatorControler.changeaccu("DIVISION PAR 0");
+                }
+            } else if (accu.isEmpty() && Pile.size() > 1) {
+                double operande1 = (double) Pile.pop();
+                double operande2 = (double) Pile.pop();
+                if (operande1 != 0) {
+                    accu = String.valueOf(operande2 / operande1);
+                } else {
+                    calculatorControler.changeaccu("DIVISION PAR 0");
+                }
             }
-            else{
-                calculatorControler.changeaccu("DIVISION PAR 0");
-            }
+        } catch (NumberFormatException e) {
+            calculatorControler.changeaccu("IMPOSSIBLE FORMAT NOMBRE INVALIDE");
         }
-        else if (accu.isEmpty() && Pile.size()>1){
-            double operande1 = (double) Pile.pop();
-            double operande2 = (double) Pile.pop();
-            if(operande1!=0){
-                accu = String.valueOf(operande2 /operande1);
-            }
-            else{
-                calculatorControler.changeaccu("DIVISION PAR 0");
-            }
-        }
+
         List<Double> stackdata = new ArrayList<>(Pile);
         calculatorControler.changestack(stackdata);
         calculatorControler.changeaccu(accu);
@@ -96,33 +108,41 @@ public class CalculatorModel implements CalculatorModelInterface {
 
     @Override
     public void opposite() {
-        if(!accu.isEmpty()) {
-            double numAccu = Double.parseDouble(accu);
-            accu = String.valueOf(-1 * numAccu);
+        try {
+            if (!accu.isEmpty()) {
+                double numAccu = Double.parseDouble(accu);
+                accu = String.valueOf(-1 * numAccu);
+            } else if (!Pile.isEmpty()) {
+                double operande1 = -1 * (double) Pile.pop();
+                Pile.push(operande1);
+            }
+        } catch (NumberFormatException e) {
+            calculatorControler.changeaccu("IMPOSSIBLE FORMAT NOMBRE INVALIDE");
         }
-        else if (!Pile.isEmpty()){
-            double operande1 = -1 * (double) Pile.pop();
-            Pile.push(operande1);
-        }
+
         List<Double> stackdata = new ArrayList<>(Pile);
         calculatorControler.changestack(stackdata);
         calculatorControler.changeaccu(accu);
-
     }
 
     @Override
     public void push() {
-        try {
-            double numberaccu = Double.parseDouble(accu);
-            Pile.push(numberaccu);
-            List<Double> stackdata = new ArrayList<>(Pile);
-            calculatorControler.changestack(stackdata);
-            accu = "";
-            calculatorControler.changeaccu(accu);
-        } catch (NumberFormatException e) {
-            calculatorControler.changeaccu("IMPOSSIBLE FORMAT NOMBRE INVALIDE");
+        if (accu != null && !accu.isEmpty()) {
+            try {
+                double numberaccu = Double.parseDouble(accu);
+                Pile.push(numberaccu);
+                List<Double> stackdata = new ArrayList<>(Pile);
+                calculatorControler.changestack(stackdata);
+                accu = "";
+                calculatorControler.changeaccu(accu);
+            } catch (NumberFormatException e) {
+                calculatorControler.changeaccu("IMPOSSIBLE FORMAT NOMBRE INVALIDE");
+            }
+        } else {
+            calculatorControler.changeaccu("ACCUMULATEUR VIDE");
         }
     }
+
 
     @Override
     public double pop() {
@@ -144,18 +164,22 @@ public class CalculatorModel implements CalculatorModelInterface {
 
     @Override
     public void swap() {
-        if(!accu.isEmpty() && !Pile.isEmpty()) {
-            double numAccu = Double.parseDouble(accu);
-            double operande1 = (double) Pile.pop();
-            accu = String.valueOf(operande1);
-            Pile.push(numAccu);
+        try {
+            if (!accu.isEmpty() && !Pile.isEmpty()) {
+                double numAccu = Double.parseDouble(accu);
+                double operande1 = (double) Pile.pop();
+                accu = String.valueOf(operande1);
+                Pile.push(numAccu);
+            } else if (accu.isEmpty() && Pile.size() > 1) {
+                double operande1 = (double) Pile.pop();
+                double operande2 = (double) Pile.pop();
+                Pile.push(operande1);
+                Pile.push(operande2);
+            }
+        } catch (NumberFormatException e) {
+            calculatorControler.changeaccu("IMPOSSIBLE FORMAT NOMBRE INVALIDE");
         }
-        else if (accu.isEmpty() && Pile.size()>1){
-            double operande1 = (double) Pile.pop();
-            double operande2 = (double) Pile.pop();
-            Pile.push(operande1);
-            Pile.push(operande2);
-        }
+
         List<Double> stackdata = new ArrayList<>(Pile);
         calculatorControler.changestack(stackdata);
         calculatorControler.changeaccu(accu);

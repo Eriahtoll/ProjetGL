@@ -82,7 +82,7 @@ private CalculatorModelInterface calculatorModel;
                     break;
 
                 case "-":
-                    calculatorModel.divide();
+                    calculatorModel.substract();
                     break;
                 case "*":
                     calculatorModel.multiply();
@@ -93,8 +93,8 @@ private CalculatorModelInterface calculatorModel;
                     break;
 
                 case "ENTER":
-                    if(!accu.isEmpty()){
-                    calculatorModel.push();}
+
+                    calculatorModel.push();
                     break;
 
                 case "DEL":
