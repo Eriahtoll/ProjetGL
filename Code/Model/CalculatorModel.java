@@ -37,6 +37,7 @@ public class CalculatorModel implements CalculatorModelInterface {
         } catch (NumberFormatException e) {
             // Si l'accumulateur ne contient pas unnombre du format "Double"
             calculatorControler.changeaccu("IMPOSSIBLE FORMAT NOMBRE INVALIDE");
+            calculatorControler.changeaccu("ERREUR VALEUR");
         }
 
         // Mise à jour de  l'interface
@@ -58,7 +59,7 @@ public class CalculatorModel implements CalculatorModelInterface {
                 accu = String.valueOf(operande2 - operande1);
             }
         } catch (NumberFormatException e) {
-            calculatorControler.changeaccu("IMPOSSIBLE FORMAT NOMBRE INVALIDE");
+            calculatorControler.changeaccu("ERREUR VALEUR");
         }
 
         // Mise à jour de l'interface
@@ -80,7 +81,7 @@ public class CalculatorModel implements CalculatorModelInterface {
                 accu = String.valueOf(operande2 * operande1);
             }
         } catch (NumberFormatException e) {
-            calculatorControler.changeaccu("IMPOSSIBLE FORMAT NOMBRE INVALIDE");
+            calculatorControler.changeaccu("ERREUR VALEUR");
         }
 
         // Met à jour l'interface
@@ -111,7 +112,7 @@ public class CalculatorModel implements CalculatorModelInterface {
                 }
             }
         } catch (NumberFormatException e) {
-            calculatorControler.changeaccu("IMPOSSIBLE FORMAT NOMBRE INVALIDE");
+            calculatorControler.changeaccu("ERREUR VALEUR");
         }
 
         // Met à jour l'interface
@@ -133,7 +134,7 @@ public class CalculatorModel implements CalculatorModelInterface {
                 Pile.push(operande1);
             }
         } catch (NumberFormatException e) {
-            calculatorControler.changeaccu("IMPOSSIBLE FORMAT NOMBRE INVALIDE");
+            calculatorControler.changeaccu("ERREUR VALEUR");
         }
 
         // Mise à jour de l'interface
@@ -154,7 +155,7 @@ public class CalculatorModel implements CalculatorModelInterface {
                 calculatorControler.changestack(stackdata);
                 calculatorControler.changeaccu(accu);
             } catch (NumberFormatException e) {
-                calculatorControler.changeaccu("IMPOSSIBLE FORMAT NOMBRE INVALIDE");
+                calculatorControler.changeaccu("ERREUR VALEUR");
             }
         } else {
             calculatorControler.changeaccu("ACCUMULATEUR VIDE");
@@ -195,7 +196,7 @@ public class CalculatorModel implements CalculatorModelInterface {
                 Pile.push(operande2);
             }
         } catch (NumberFormatException e) {
-            calculatorControler.changeaccu("IMPOSSIBLE FORMAT NOMBRE INVALIDE");
+            calculatorControler.changeaccu("ERREUR VALEUR");
         }
 
         // Mise à jour de  l'interface
