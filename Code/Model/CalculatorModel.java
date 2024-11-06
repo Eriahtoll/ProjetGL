@@ -35,9 +35,7 @@ public class CalculatorModel implements CalculatorModelInterface {
                 accu = String.valueOf(operande2 + operande1); // On ajoute les 2 valeurs dans l'accumulateur
             }
         } catch (NumberFormatException e) {
-            // Si l'accumulateur ne contient pas unnombre du format "Double"
-            calculatorControler.changeaccu("IMPOSSIBLE FORMAT NOMBRE INVALIDE");
-            calculatorControler.changeaccu("ERREUR VALEUR");
+
         }
 
         // Mise à jour de  l'interface
@@ -51,15 +49,15 @@ public class CalculatorModel implements CalculatorModelInterface {
         try {
             if (!accu.isEmpty() && !Pile.isEmpty()) {
                 double numAccu = Double.parseDouble(accu);
-                double operande1 = Pile.pop();
+                double operande1 = (double) Pile.pop();
                 accu = String.valueOf(operande1 - numAccu);
             } else if (accu.isEmpty() && Pile.size() > 1) {
-                double operande1 = Pile.pop();
-                double operande2 = Pile.pop();
+                double operande1 = (double) Pile.pop();
+                double operande2 = (double) Pile.pop();
                 accu = String.valueOf(operande2 - operande1);
             }
         } catch (NumberFormatException e) {
-            calculatorControler.changeaccu("ERREUR VALEUR");
+
         }
 
         // Mise à jour de l'interface
@@ -73,15 +71,15 @@ public class CalculatorModel implements CalculatorModelInterface {
         try {
             if (!accu.isEmpty() && !Pile.isEmpty()) {
                 double numAccu = Double.parseDouble(accu);
-                double operande1 = Pile.pop();
+                double operande1 = (double) Pile.pop();
                 accu = String.valueOf(operande1 * numAccu);
             } else if (accu.isEmpty() && Pile.size() > 1) {
-                double operande1 = Pile.pop();
-                double operande2 = Pile.pop();
+                double operande1 = (double) Pile.pop();
+                double operande2 = (double) Pile.pop();
                 accu = String.valueOf(operande2 * operande1);
             }
         } catch (NumberFormatException e) {
-            calculatorControler.changeaccu("ERREUR VALEUR");
+
         }
 
         // Met à jour l'interface
@@ -95,30 +93,33 @@ public class CalculatorModel implements CalculatorModelInterface {
         try {
             if (!accu.isEmpty() && !Pile.isEmpty()) {
                 double numAccu = Double.parseDouble(accu);
-                double operande1 = Pile.pop();
+
                 if (numAccu != 0) {
-                    // Permet de s'assurer que l'opperation n'est pas une dévision par 0
+                    // Permet de s'assurer que l'operation n'est pas une division par 0
+                    double operande1 = (double) Pile.pop();
                     accu = String.valueOf(operande1 / numAccu);
+                    calculatorControler.changeaccu(accu);
                 } else {
                     calculatorControler.changeaccu("DIVISION PAR 0");
                 }
             } else if (accu.isEmpty() && Pile.size() > 1) {
-                double operande1 = Pile.pop();
-                double operande2 = Pile.pop();
+                double operande1 = (double) Pile.pop();
                 if (operande1 != 0) {
+                    double operande2 = (double) Pile.pop();
                     accu = String.valueOf(operande2 / operande1);
+                    calculatorControler.changeaccu(accu);
                 } else {
+                    Pile.push(operande1); //permet de retablir l'état initial
                     calculatorControler.changeaccu("DIVISION PAR 0");
                 }
             }
         } catch (NumberFormatException e) {
-            calculatorControler.changeaccu("ERREUR VALEUR");
+
         }
 
         // Met à jour l'interface
         List<Double> stackdata = new ArrayList<>(Pile);
         calculatorControler.changestack(stackdata);
-        calculatorControler.changeaccu(accu);
     }
 
     @Override
@@ -128,10 +129,12 @@ public class CalculatorModel implements CalculatorModelInterface {
                 // Si l'accumulateur est vide, on inverse la derniere valeur de la pile
                 double numAccu = Double.parseDouble(accu);
                 accu = String.valueOf(-1 * numAccu);
+                calculatorControler.changeaccu(accu);
             } else if (!Pile.isEmpty()) {
                 //. Si l'accumulateur contient une valeur, on l'inverse
                 double operande1 = -1 * Pile.pop();
                 Pile.push(operande1);
+                calculatorControler.changeaccu(accu);
             }
         } catch (NumberFormatException e) {
             calculatorControler.changeaccu("ERREUR VALEUR");
@@ -140,7 +143,6 @@ public class CalculatorModel implements CalculatorModelInterface {
         // Mise à jour de l'interface
         List<Double> stackdata = new ArrayList<>(Pile);
         calculatorControler.changestack(stackdata);
-        calculatorControler.changeaccu(accu);
     }
 
     @Override
@@ -186,14 +188,16 @@ public class CalculatorModel implements CalculatorModelInterface {
         try {
             if (!accu.isEmpty() && !Pile.isEmpty()) { // Si l'accu n'est pas vide, on inverse la derniere valeur de la pile avec l'accu
                 double numAccu = Double.parseDouble(accu);
-                double operande1 = Pile.pop();
-                accu = String.valueOf(operande1); // l'accumulateur récupere la derniere valeur de la pile
-                Pile.push(numAccu); //La pile recois la valeur de l'accumulateur
-            } else if (accu.isEmpty() && Pile.size() > 1) { //Si l'accu est vide, on inverse les 2 dernères valeurs de la pile
-                double operande1 = Pile.pop();
-                double operande2 = Pile.pop();
+                double operande1 = (double) Pile.pop();
+                accu = String.valueOf(operande1);
+                Pile.push(numAccu);
+                calculatorControler.changeaccu(accu);
+            } else if (accu.isEmpty() && Pile.size() > 1) {
+                double operande1 = (double) Pile.pop();
+                double operande2 = (double) Pile.pop();
                 Pile.push(operande1);
                 Pile.push(operande2);
+                calculatorControler.changeaccu(accu);
             }
         } catch (NumberFormatException e) {
             calculatorControler.changeaccu("ERREUR VALEUR");
@@ -202,7 +206,6 @@ public class CalculatorModel implements CalculatorModelInterface {
         // Mise à jour de  l'interface
         List<Double> stackdata = new ArrayList<>(Pile);
         calculatorControler.changestack(stackdata);
-        calculatorControler.changeaccu(accu);
     }
 
     @Override

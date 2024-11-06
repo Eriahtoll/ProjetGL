@@ -19,7 +19,7 @@ public class Main extends Application {
         CalculatorModel calculatorModel = new CalculatorModel(calculatorControler);
         calculatorControler.setCalculatorGUI(calculatorGUI);
         calculatorControler.setCalculatorModel(calculatorModel);
-        System.out.println(4);
+
 
 
     }
